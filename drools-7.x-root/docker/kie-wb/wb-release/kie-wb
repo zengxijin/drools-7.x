@@ -1,0 +1,5 @@
+wget https://repository.jboss.org/nexus/content/groups/public-jboss/org/kie/kie-drools-wb/7.12.0.Final/kie-drools-wb-7.12.0.Final-wildfly11.war
+mv kie-drools-wb-7.12.0.Final-wildfly11.war kie-wb.war
+
+docker build --rm -t zengxijin/kie-wb-7.12.final:latest .
+docker run -P -d --name wb01 zengxijin/kie-wb-7.12.final:latest

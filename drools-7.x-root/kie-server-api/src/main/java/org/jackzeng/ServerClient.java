@@ -11,6 +11,7 @@ import org.kie.server.client.RuleServicesClient;
  */
 public class ServerClient {
 
+    // using REST with JSON
     private static final MarshallingFormat FORMAT = MarshallingFormat.JSON;
     private final static KieServicesClient kieServicesClient;
 

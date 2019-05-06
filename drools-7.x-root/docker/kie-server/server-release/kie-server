@@ -1,0 +1,5 @@
+wget https://repository.jboss.org/nexus/content/groups/public-jboss/org/kie/server/kie-server/7.12.0.Final/kie-server-7.12.0.Final-ee7.war
+mv kie-server-7.12.0.Final-ee7.war kie-server.war
+
+docker build --rm -t zengxijin/kie-server-7.12.final:latest .
+docker run -P -d --name kie01 zengxijin/kie-server-7.12.final:latest
