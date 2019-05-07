@@ -1,0 +1,3 @@
+mkdir -p /home/docker-files/workbench/git
+mkdir -p /home/docker-files/workbench/jars
+mkdir -p /home/docker-files/server/m2repo

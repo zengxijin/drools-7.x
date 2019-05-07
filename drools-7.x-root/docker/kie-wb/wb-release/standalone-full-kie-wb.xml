@@ -38,7 +38,7 @@
         <property name="org.kie.demo" value="${org.kie.demo:false}"/>
         <property name="org.kie.example" value="${org.kie.example:false}"/>
         <property name="org.uberfire.nio.git.ssh.host" value="0.0.0.0"/>
-        <property name="org.uberfire.nio.git.dir" value="${env.KIE_WB_NIO_GIT}"/>
+<!--        <property name="org.uberfire.nio.git.dir" value="${env.KIE_WB_NIO_GIT}"/>-->
     </system-properties>
     <management>
         <security-realms>

@@ -9,7 +9,7 @@
       KIE_MAVEN_REPO_PASSWORD - Defaults to admin
 -->
 <settings>
-    <localRepository>${env.HOME}/.m2/repository</localRepository>
+    <localRepository>/home/artifacts/.m2/repository</localRepository>
 
     <proxies>
     </proxies>
@@ -17,8 +17,8 @@
     <servers>
         <server>
             <id>kie-workbench</id>
-            <username>${env.KIE_MAVEN_REPO_USER}</username>
-            <password>${env.KIE_MAVEN_REPO_PASSWORD}</password>
+            <username>kieadmin</username>
+            <password>bkjk@123</password>
             <configuration>
                 <wagonProvider>httpclient</wagonProvider>
                 <httpConfiguration>
@@ -56,7 +56,7 @@
                 <repository>
                     <id>kie-workbench</id>
                     <name>JBoss BRMS Guvnor M2 Repository</name>
-                    <url>${env.KIE_MAVEN_REPO}</url>
+                    <url>http://192.168.56.101:8081/kie-wb/maven2</url>
                     <layout>default</layout>
                     <releases>
                         <enabled>true</enabled>

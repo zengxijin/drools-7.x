@@ -1,11 +1,5 @@
 #!/bin/sh
 
-# *****************************************************
-# Drools Workbench Showcase - Docker image start script
-# *****************************************************
-
-# Program arguments
-#
 # -c | --container-name:    The name for the created container.
 #                           If not specified, defaults to "drools-workbench-showcase"
 # -h | --help;              Show the script usage
@@ -44,17 +38,22 @@ if [ -f docker.pid ]; then
     rm -f docker.pid
 fi
 
+KIE_SERVER_USER=kieserver
+KIE_SERVER_PWD=bkjk@123
+SERVER_ARGUMENTS=" -Dorg.kie.server.user=$KIE_SERVER_USER -Dorg.kie.server.pwd=$KIE_SERVER_PWD "
+ARGUMENTS=" $SERVER_ARGUMENTS "
+
 # Start the jboss docker container
 echo "Starting $CONTAINER_NAME docker container using:"
 echo "** Container name: $CONTAINER_NAME"
-image_drools_workbench=$(docker run -P -d --name $CONTAINER_NAME $IMAGE_NAME:$IMAGE_TAG)
+image_drools_workbench=$(docker run -e KIE_ARGUMENTS="$ARGUMENTS" -v /home/docker-files/workbench/jars:/home/projects/m2/.m2 -v /home/docker-files/workbench/git:/home/projects/git -p 8081:8080 -d --name $CONTAINER_NAME $IMAGE_NAME:$IMAGE_TAG)
 ip_drools_workbench=$(docker inspect $image_drools_workbench | grep \"IPAddress\" | awk '{print $2}' | tr -d '",')
 echo $image_drools_workbench > docker.pid
 
 # End
 echo ""
 echo "Server starting in $ip_drools_workbench"
-echo "You can access the server root context in http://$ip_drools_workbench:8080"
-echo "JBoss Drools Workbench is running at http://$ip_drools_workbench:8080/business-central"
+echo "You can access the server root context in http://$ip_drools_workbench:8081"
+echo "Kie Drools Workbench is running at http://$ip_drools_workbench:8081/kie-wb"
 
 exit 0
