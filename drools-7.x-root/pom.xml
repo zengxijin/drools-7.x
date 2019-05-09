@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>kie-server-api</module>
+<!--        <module>kie-project-starter</module>-->
     </modules>
 
 

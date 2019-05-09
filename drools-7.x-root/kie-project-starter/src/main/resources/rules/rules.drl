@@ -1,0 +1,13 @@
+package rules;
+
+import org.jackzeng.TestBean
+
+rule "check-age"
+  dialect "mvel"
+  no-loop true
+  when
+    $b : TestBean(age < 18)
+  then
+    $b.setResult("BAD");
+    System.out.println("fired");
+end
