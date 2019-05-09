@@ -1,14 +1,21 @@
 package org.jackzeng;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
 import org.kie.api.KieServices;
 import org.kie.api.command.Command;
 import org.kie.api.command.KieCommands;
+import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.StatelessKieSession;
+import org.kie.internal.command.CommandFactory;
+import org.kie.internal.conf.SequentialOption;
+import org.kie.internal.utils.KieHelper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,11 +31,15 @@ public class TestCase {
         container = ks.getKieClasspathContainer();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 //        statefulTest();
-        statelessTest();
+//        statelessTest();
+        testSharedSegment();
     }
 
+    /**
+     * for whole kjar project test (stateless)
+     */
     private static void statelessTest() {
         StatelessKieSession session = container.newStatelessKieSession("defaultSession");
         TestBean bean = new TestBean();
@@ -48,6 +59,9 @@ public class TestCase {
 //        results.getValue( "Get People" );// returns the query as a QueryResults instance.
     }
 
+    /**
+     * for whole kjar project test (stateful)
+     */
     private static void statefulTest() {
         KieSession session = container.newKieSession("statefulSession");
         TestBean bean = new TestBean();
@@ -55,6 +69,25 @@ public class TestCase {
 
         session.insert(bean);
         session.fireAllRules();
+    }
 
+    /**
+     * for single DRL file test
+     * @throws Exception
+     */
+    public static void testSharedSegment() throws Exception {
+        String str = Resources.toString(Resources.getResource("./rules/rules.drl"), Charsets.UTF_8);
+        System.out.println(str);
+        StatelessKieSession ksession = new KieHelper()
+                .addContent(str, ResourceType.DRL)
+                .build(SequentialOption.YES)
+                .newStatelessKieSession();
+
+        KieCommands kieCommands = ks.getCommands();
+        List<Command> cmds = new ArrayList<Command>();
+        cmds.add( kieCommands.newInsert( new TestBean(null, 12), "test" ) );
+
+        ExecutionResults results = ksession.execute(kieCommands.newBatchExecution( cmds ));
+        System.out.println(results.getValue("test"));
     }
 }

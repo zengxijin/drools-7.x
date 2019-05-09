@@ -9,4 +9,12 @@ import lombok.Data;
 public class TestBean {
     private String result;
     private Integer age;
+
+    public TestBean(String result, Integer age) {
+        this.result = result;
+        this.age = age;
+    }
+
+    public TestBean() {
+    }
 }
