@@ -1,0 +1,22 @@
+{
+  "lookup": "creditSession",
+  "commands": [
+    {
+      "insert": {
+        "return-object": true,
+        "out-identifier": "key",
+        "object": {
+          "com.bkjk.credit.MyBean": {
+            "age": 12
+          }
+        }
+      }
+    },
+    {
+      "fire-all-rules": {
+        "max": 100,
+        "out-identifier": "my-case"
+      }
+    }
+  ]
+}
