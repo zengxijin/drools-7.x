@@ -9,3 +9,8 @@ mkdir -p /home/docker-files/workbench/jars
 mkdir -p /home/docker-files/server/m2repo
 chmod 777 /home/docker-files/workbench/git && chmod 777 /home/docker-files/workbench/jars && chmod 777 /home/docker-files/server/m2repo
 ```
+
+### 启动kie-workbench
+```bash
+bash wb_start.sh -c wb01 -port 8123
+```

@@ -1,19 +1,17 @@
-<!-- CUSTOM settings.xml for KIE Execution Server
-    *********************************************
-    - This is the custom settings.xml file used for KIE Execution Server to download the artifacts from the Maven repository
-    provided by the Drools WB internals.
-    - This file is deployed into jboss user home at $HOME/.m2/settings.xml
-    - This file uses system environment variables to point to the Drools WB Docker container that provides the Maven repository. These variables are:
-      KIE_MAVEN_REPO - Defaults to http://localhost:8080/drools-wb/maven2
-      KIE_MAVEN_REPO_USER - Defaults to admin
-      KIE_MAVEN_REPO_PASSWORD - Defaults to admin
--->
+#!/bin/sh
+
+mkdir -p /home/docker-files/workbench/git
+mkdir -p /home/docker-files/workbench/jars
+mkdir -p /home/docker-files/server/m2repo
+chmod 777 /home/docker-files/workbench/git && chmod 777 /home/docker-files/workbench/jars && chmod 777 /home/docker-files/server/m2repo
+
+IP=$1
+PORT=$2
+SETTINGS_STR="
 <settings>
     <localRepository>/home/artifacts/.m2/repository</localRepository>
-
     <proxies>
     </proxies>
-
     <servers>
         <server>
             <id>kie-workbench</id>
@@ -29,10 +27,8 @@
             </configuration>
         </server>
     </servers>
-
     <mirrors>
     </mirrors>
-
     <profiles>
         <profile>
             <id>kie</id>
@@ -56,7 +52,7 @@
                 <repository>
                     <id>kie-workbench</id>
                     <name>JBoss BRMS Guvnor M2 Repository</name>
-                    <url>http://192.168.56.101:8081/kie-wb/maven2</url>
+                    <url>http://$IP:$PORT/kie-wb/maven2</url>
                     <layout>default</layout>
                     <releases>
                         <enabled>true</enabled>
@@ -90,3 +86,7 @@
         <activeProfile>kie</activeProfile>
     </activeProfiles>
 </settings>
+"
+echo $SETTINGS_STR
+echo $SETTINGS_STR > /home/artifacts/.m2/settings.xml
+echo "writing content to file /home/artifacts/.m2/settings.xml"
