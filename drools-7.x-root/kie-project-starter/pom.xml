@@ -99,7 +99,7 @@
 
     <distributionManagement>
 
-
+        <!--`mvn deploy` to publish kjar to workbench maven-->
         <repository>
             <id>kie-workbench</id>
             <name>JBoss BRMS Guvnor M2 Repository</name>
