@@ -78,12 +78,13 @@ public class TestCase {
     public static void testSharedSegment() throws Exception {
         String str = Resources.toString(Resources.getResource("./rules/rules.drl"), Charsets.UTF_8);
         System.out.println(str);
-        StatelessKieSession ksession = new KieHelper()
-                .addContent(str, ResourceType.DRL)
+        KieHelper helper = new KieHelper();
+
+        StatelessKieSession ksession = helper.addContent(str, ResourceType.DRL)
                 .build(SequentialOption.YES)
                 .newStatelessKieSession();
 
-        KieCommands kieCommands = ks.getCommands();
+        KieCommands kieCommands = helper.ks.getCommands();
         List<Command> cmds = new ArrayList<Command>();
         cmds.add( kieCommands.newInsert( new TestBean(null, 12), "test" ) );
 

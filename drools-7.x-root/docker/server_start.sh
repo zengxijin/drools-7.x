@@ -78,7 +78,7 @@ WORKBENCH_ARGUMENTS=" $WORKBENCH_ARGUMENTS -Dkie.maven.settings.custom=/home/art
 
 ARGUMENTS=" $SERVER_ARGUMENTS $WORKBENCH_ARGUMENTS "
 
-MAP_PATH=/home/docker-files/server/m2repo
+MAP_PATH=/home/docker-files/server/$CONTAINER_NAME/m2repo
 
 mkdir -p $MAP_PATH
 chmod 777 $MAP_PATH
@@ -173,7 +173,7 @@ docker run \
 -e KIE_ARGUMENTS="$ARGUMENTS" \
 -p $PORT:8080 \
 -p ::8001 \
--v /home/docker-files/server/m2repo:/home/artifacts/.m2 \
+-v $MAP_PATH:/home/artifacts/.m2 \
 -d \
 --name $CONTAINER_NAME $IMAGE_NAME:$IMAGE_TAG
 

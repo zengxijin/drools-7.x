@@ -46,14 +46,16 @@ SERVER_ARGUMENTS=" -Dorg.kie.server.user=$KIE_SERVER_USER -Dorg.kie.server.pwd=$
 ARGUMENTS=" $SERVER_ARGUMENTS "
 
 # create host mapping dir for docker running workbench important resources
-mkdir -p /home/docker-files/workbench/git
-mkdir -p /home/docker-files/workbench/jars
-chmod 777 /home/docker-files/workbench/git && chmod 777 /home/docker-files/workbench/jars
+WB_GIT_PATH=/home/docker-files/workbench/$CONTAINER_NAME/git
+WB_JARS_PATH=/home/docker-files/workbench/$CONTAINER_NAME/jars
+mkdir -p $WB_GIT_PATH
+mkdir -p $WB_JARS_PATH
+chmod 777 $WB_GIT_PATH && chmod 777 $WB_JARS_PATH
 
 docker run \
 -e KIE_ARGUMENTS="$ARGUMENTS" \
--v /home/docker-files/workbench/jars:/home/projects/m2/.m2 \
--v /home/docker-files/workbench/git:/home/projects/git \
+-v $WB_JARS_PATH:/home/projects/m2/.m2 \
+-v $WB_GIT_PATH:/home/projects/git \
 -p $WB_PORT:8080 \
 -d \
 --name $CONTAINER_NAME $IMAGE_NAME:$IMAGE_TAG
