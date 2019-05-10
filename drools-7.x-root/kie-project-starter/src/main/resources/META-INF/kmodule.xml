@@ -1,6 +1,13 @@
 <kmodule xmlns="http://www.drools.org/xsd/kmodule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <kbase name="testBase" default="true" eventProcessingMode="stream" equalsBehavior="identity">
-        <ksession name="defaultSession" type="stateless" default="true" clockType="realtime"/>
-        <ksession name="statefulSession" type="stateful" default="false" clockType="realtime"/>
+        <ksession name="defaultSession" type="stateless" default="true" clockType="realtime" >
+            <listeners>
+<!--                <ruleRuntimeEventListener type="org.domain.RuleRuntimeListener"/>-->
+<!--                <agendaEventListener type="org.domain.FirstAgendaListener"/>-->
+                <agendaEventListener type="org.jackzeng.CustomAgendaEventListener"/>
+<!--                <processEventListener type="org.domain.ProcessListener"/>-->
+            </listeners>
+        </ksession>
+        <ksession name="statefulSession" type="stateful" default="false" clockType="realtime" />
     </kbase>
 </kmodule>

@@ -1,20 +1,34 @@
 {
-	"lookup": "defaultSession",
-	"commands": [{
-		"insert": {
-			"return-object": true,
-			"out-identifier": "key",
-			"object": {
-				"org.jackzeng.TestBean": {
-					"age": 12
-				}
-			}
-		}
-	},
-	{
-		"fire-all-rules": {
-			"max": 100,
-			"out-identifier": "my-case"
-		}
-	}]
+  "lookup": "defaultSession",
+  "commands": [
+    {
+      "insert": {
+        "return-object": true,
+        "out-identifier": "BasicInfo",
+        "object": {
+          "org.jackzeng.BasicInfo": {
+            "sequenceId": "123",
+            "clientId": "credit"
+          }
+        }
+      }
+    },
+    {
+      "insert": {
+        "return-object": true,
+        "out-identifier": "TestBean",
+        "object": {
+          "org.jackzeng.TestBean": {
+            "age": 12
+          }
+        }
+      }
+    },
+    {
+      "fire-all-rules": {
+        "max": 100,
+        "out-identifier": "my-case"
+      }
+    }
+  ]
 }

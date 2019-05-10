@@ -33,8 +33,8 @@ public class TestCase {
 
     public static void main(String[] args) throws Exception {
 //        statefulTest();
-//        statelessTest();
-        testSharedSegment();
+        statelessTest();
+//        testSharedSegment();
     }
 
     /**
@@ -43,7 +43,7 @@ public class TestCase {
     private static void statelessTest() {
         StatelessKieSession session = container.newStatelessKieSession("defaultSession");
         TestBean bean = new TestBean();
-        bean.setAge(12);
+        bean.setAge(19);
 
         KieCommands kieCommands = ks.getCommands();
 
