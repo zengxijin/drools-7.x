@@ -79,9 +79,11 @@ WORKBENCH_ARGUMENTS=" $WORKBENCH_ARGUMENTS -Dkie.maven.settings.custom=/home/art
 ARGUMENTS=" $SERVER_ARGUMENTS $WORKBENCH_ARGUMENTS "
 
 MAP_PATH=/home/docker-files/server/$CONTAINER_NAME/m2repo
+LOGS_PATH=/home/docker-files/server/$CONTAINER_NAME/log
 
 mkdir -p $MAP_PATH
-chmod 777 $MAP_PATH
+mkdir -p $LOGS_PATH
+chmod 777 $MAP_PATH && chmod 777 $LOGS_PATH
 # it's important for kie server to load artifacts from workbench maven repository of installed projects
 SETTINGS_STR="
 <settings>
@@ -174,6 +176,7 @@ docker run \
 -p $PORT:8080 \
 -p ::8001 \
 -v $MAP_PATH:/home/artifacts/.m2 \
+-v $LOGS_PATH:/opt/jboss/wildfly/standalone/log \
 -d \
 --name $CONTAINER_NAME $IMAGE_NAME:$IMAGE_TAG
 

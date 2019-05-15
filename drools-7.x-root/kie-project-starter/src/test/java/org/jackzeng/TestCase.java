@@ -43,7 +43,7 @@ public class TestCase {
     private static void statelessTest() {
         StatelessKieSession session = container.newStatelessKieSession("defaultSession");
         TestBean bean = new TestBean();
-        bean.setAge(19);
+        bean.setAge(12);
 
         KieCommands kieCommands = ks.getCommands();
 

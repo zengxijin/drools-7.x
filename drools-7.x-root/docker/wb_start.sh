@@ -48,14 +48,17 @@ ARGUMENTS=" $SERVER_ARGUMENTS "
 # create host mapping dir for docker running workbench important resources
 WB_GIT_PATH=/home/docker-files/workbench/$CONTAINER_NAME/git
 WB_JARS_PATH=/home/docker-files/workbench/$CONTAINER_NAME/jars
+LOGS_PATH=/home/docker-files/workbench/$CONTAINER_NAME/log
 mkdir -p $WB_GIT_PATH
 mkdir -p $WB_JARS_PATH
-chmod 777 $WB_GIT_PATH && chmod 777 $WB_JARS_PATH
+mkdir -p $LOGS_PATH
+chmod 777 $WB_GIT_PATH && chmod 777 $WB_JARS_PATH && chmod 777 $LOGS_PATH
 
 docker run \
 -e KIE_ARGUMENTS="$ARGUMENTS" \
 -v $WB_JARS_PATH:/home/projects/m2/.m2 \
 -v $WB_GIT_PATH:/home/projects/git \
+-v $LOGS_PATH:/opt/jboss/wildfly/standalone/log \
 -p $WB_PORT:8080 \
 -d \
 --name $CONTAINER_NAME $IMAGE_NAME:$IMAGE_TAG

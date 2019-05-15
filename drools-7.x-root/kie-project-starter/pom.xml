@@ -22,7 +22,7 @@
     </properties>
 
     <dependencies>
-
+        <!-- drools kie dependency scope-->
         <dependency>
             <groupId>org.kie</groupId>
             <artifactId>kie-internal</artifactId>
@@ -54,6 +54,7 @@
             <version>7.12.0.Final</version>
             <scope>provided</scope>
         </dependency>
+        <!-- end of drools kie dependency scope-->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -62,6 +63,23 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- for log and test -->
+        <!-- 1.7.25 is the same version with kie-server 7.12.Final -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.25</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- test scope-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
